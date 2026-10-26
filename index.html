@@ -1861,8 +1861,8 @@
         }
       }
 
-      renderRoadmapCards();
-      renderCertificateUI();
+      if (typeof renderRoadmapCards === "function") renderRoadmapCards();
+      if (typeof renderCertificateUI === "function") renderCertificateUI();
     }
 
     function renderRoadmapCards() {
@@ -2491,7 +2491,9 @@
     }
 
     // ==================== INITIALIZATION & EVENT LISTENERS ====================
-    window.addEventListener('DOMContentLoaded', () => {
+    function initAcademyApp() {
+      if (window.__moazAcademyReady) return;
+      window.__moazAcademyReady = true;
       loadProgress();
       updateGlobalStatsUI();
       renderDailySentenceCard();
@@ -2841,7 +2843,7 @@
         return VIDEO_LESSONS_DATA.filter(v => v.level === state.vidLevelFilter);
       }
 
-      window.renderVideoModule = function() {
+      function renderVideoModule() {
         document.querySelectorAll('.vid-level-btn').forEach(btn => {
           const isAct = btn.getAttribute('data-vid-level') === state.vidLevelFilter;
           btn.className = isAct
@@ -3074,7 +3076,7 @@
       });
 
       // ==================== CERTIFICATE & AUTH LOGIC ====================
-      window.renderCertificateUI = function() {
+      function renderCertificateUI() {
         const stAr = state.studentNameAr || 'طالب الأكاديمية المتميز';
         const stEn = state.studentNameEn || 'Distinguished Academy Student';
         const dispAr = document.getElementById('cert-display-student-ar');
@@ -3395,7 +3397,13 @@
         authModal.classList.add('hidden');
         switchTab('certificate');
       });
-    });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAcademyApp);
+    } else {
+      initAcademyApp();
+    }
+    window.addEventListener('load', initAcademyApp);
   </script>
 </body>
 </html>
