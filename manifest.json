@@ -1,0 +1,14 @@
+manifest.json
+{
+  "id": "/moaz-academy/",
+  "name": "أكاديمية معاذ العكلي للإنجليزية",
+  "short_name": "أكاديمية معاذ",
+  "description": "تعلم اللغة الإنجليزية من الصفر خطوة بخطوة",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/moaz-academy/",
+  "scope": "/moaz-academy/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb"
+}
